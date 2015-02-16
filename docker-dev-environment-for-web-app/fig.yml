@@ -1,0 +1,8 @@
+myserver:
+    build: .
+    ports:
+    - "8080:80"
+    environment:
+    - MODE=dev
+    volumes:
+    - /path/to/app:/usr/src/app:ro
