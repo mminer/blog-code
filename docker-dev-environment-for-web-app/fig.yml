@@ -5,4 +5,4 @@ myserver:
     environment:
     - MODE=dev
     volumes:
-    - /path/to/app:/usr/src/app:ro
+    - .:/usr/src/app:ro
