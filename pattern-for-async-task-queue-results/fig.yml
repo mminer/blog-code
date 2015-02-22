@@ -1,0 +1,21 @@
+server:
+    image: mminer/myserver
+    ports:
+    - "5000:5000"
+    links:
+    - notifier
+    - rabbitmq
+
+worker:
+    image: mminer/myworker
+    links:
+    - notifier
+    - rabbitmq
+
+notifier:
+    image: mminer/mynotifier
+    ports:
+    - "3000:3000"
+
+rabbitmq:
+    image: rabbitmq:3.4

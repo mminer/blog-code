@@ -1,0 +1,41 @@
+<!doctype html>
+<html>
+<head>
+	<meta charset="utf-8">
+	<title>Task Example</title>
+</head>
+<body>
+
+    <button type="button">Run Task</button>
+    <br>
+    Result: <span id="result"></span>
+
+    <script src="{{ notifier_url }}/socket.io/socket.io.js"></script>
+    <script>
+        var resultElement = document.getElementById('result'),
+            client = io('{{ notifier_url }}'),
+            clientid = null;
+
+		client.on('register', function(id) {
+            clientid = id;
+		});
+
+		client.on('notify', function(result) {
+            resultElement.textContent = result;
+		});
+
+        document.querySelector('button').onclick = function() {
+            var request = new XMLHttpRequest();
+            request.open('POST', '/runtask', true);
+            request.setRequestHeader(
+                'Content-Type',
+                'application/x-www-form-urlencoded; charset=utf-8');
+            request.onload = function() {
+                resultElement.textContent = request.responseText;
+            };
+            request.send('clientid=' + clientid);
+        };
+    </script>
+
+</body>
+</html>
