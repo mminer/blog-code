@@ -26,4 +26,4 @@ def fetch_all_pages(url, request_func=requests.get):
 url = 'https://api.github.com/repos/Zulko/moviepy/commits'
 request_func = partial(requests.get, params={'since': '2015-01-01T00:00:00Z'})
 results = fetch_all_pages(url, request_func)
-print(results)
+print(list(results))
